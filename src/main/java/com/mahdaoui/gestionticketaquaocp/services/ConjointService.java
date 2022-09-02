@@ -12,7 +12,7 @@ public interface ConjointService {
 
     public void  deleteById(Long id);
 
-    List<Conjoint> findAllByMatricule(String matricule);
+    public void deleteAll();
 
     public List<Conjoint> findAll();
 

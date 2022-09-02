@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+
 public class CollaborateurController implements CollaborateurApi {
 
     @Autowired
@@ -27,8 +28,13 @@ public class CollaborateurController implements CollaborateurApi {
     }
 
     @Override
-    public void deleteById(Long id) {
-        collaborateurService.deleteById(id);
+    public ResponseEntity<Collaborateur> update(Collaborateur collaborateur) {
+        return new ResponseEntity<>(collaborateurService.update(collaborateur) , HttpStatus.CREATED );
+    }
+
+    @Override
+    public void deleteAll() {
+        collaborateurService.deleteAll();
     }
 
     @Override
@@ -37,7 +43,9 @@ public class CollaborateurController implements CollaborateurApi {
     }
 
     @Override
-    public ResponseEntity<Collaborateur> findById(Long id) {
-        return new ResponseEntity<>(collaborateurService.findById(id),HttpStatus.OK);
+    public ResponseEntity<Long> countAllCollaborateurs() {
+        return new ResponseEntity<Long>( collaborateurService.countAllCollaborateurs(),HttpStatus.OK );
     }
+
+
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface TicketService {
 
-    List<Ticket> findAllByMatricule(String matricule);
+    /*List<Ticket> findAllByMatricule(String matricule);*/
 
     public Ticket save(Ticket ticket);
 
@@ -18,6 +18,8 @@ public interface TicketService {
     public Ticket findById(Long id);
 
     public List<Ticket> findAll();
+
+    public void deleteAll();
 
 
 }

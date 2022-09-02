@@ -22,22 +22,22 @@ public class CollaborateurValidator {
             return errors;
 
         }
-        if(StringUtils.hasLength(collaborateur.getCin())){
+        if(!StringUtils.hasLength(collaborateur.getCin())){
 
             errors.add("veuillez remplir le Cin");
 
         }
-        if(StringUtils.hasLength(collaborateur.getMatricule())){
+        if(!StringUtils.hasLength(collaborateur.getMatricule())){
 
             errors.add("veuillez remplir le matricule");
 
         }
-        if(StringUtils.hasLength(collaborateur.getNom())){
+        if(!StringUtils.hasLength(collaborateur.getNom())){
 
             errors.add("veuillez remplir le Nom");
 
         }
-        if(StringUtils.hasLength(collaborateur.getPrenom())){
+        if(!StringUtils.hasLength(collaborateur.getPrenom())){
 
             errors.add("veuillez remplir le preom");
         }

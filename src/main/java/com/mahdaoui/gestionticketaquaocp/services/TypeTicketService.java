@@ -14,8 +14,10 @@ public interface TypeTicketService {
 
     public void  deleteById(Long id);
 
-    String findTypeTicketByType(String type);
+    TypeTicket findTypeTicketByType(String type);
 
     public List<TypeTicket> findAll();
+
+    public TypeTicket findById(Long id);
 
 }

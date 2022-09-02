@@ -20,16 +20,16 @@ public class ConjointValidator {
             return errors;
 
         }
-        if(StringUtils.hasLength(conjoint.getMatricule())){
+     /*   if(StringUtils.hasLength(conjoint.getMatricule())){
 
             errors.add("veuillez remplir le matricule");
 
-        }
-        if(StringUtils.hasLength(conjoint.getNom())){
+        }*/
+        if(!StringUtils.hasLength(conjoint.getNom())){
 
             errors.add("veuillez remplir le Nom");
 
-        }if(StringUtils.hasLength(conjoint.getPrenom()))
+        }if(!StringUtils.hasLength(conjoint.getPrenom()))
         {
 
             errors.add("veuillez remplir le preom");

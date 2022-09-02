@@ -20,17 +20,13 @@ public class EnfantValidator {
             errors.add("veuillez remplir la date de naissance");
             return errors;
         }
-        if(StringUtils.hasLength(enfant.getMatricule())){
 
-            errors.add("veuillez remplir le matricule");
-
-        }
-        if(StringUtils.hasLength(enfant.getNom())){
+        if(!StringUtils.hasLength(enfant.getNom())){
 
             errors.add("veuillez remplir le Nom");
 
         }
-        if(StringUtils.hasLength(enfant.getPrenom())){
+        if(!StringUtils.hasLength(enfant.getPrenom())){
 
             errors.add("veuillez remplir le preom");
         }

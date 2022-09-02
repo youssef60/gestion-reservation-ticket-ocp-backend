@@ -21,10 +21,10 @@ public class TypeTicketServiceImpl implements TypeTicketService {
     TypeTicketRepository typeTicketRepository;
 
     @Override
-    public String findTypeTicketByType(String type) {
-        if (!StringUtils.hasLength(type)) {
+    public TypeTicket findTypeTicketByType(String type) {
+      /*  if (!StringUtils.hasLength(type)) {
             throw new EntityNotFoundException("le type n'est pas valide");
-        }
+        }*/
 
         return typeTicketRepository.findTypeTicketByType(type).orElseThrow(
                 () -> new EntityNotFoundException("cette type n'existe pas", ErrorCodes.TYPETICKET_NOT_FOUND)
@@ -36,12 +36,19 @@ public class TypeTicketServiceImpl implements TypeTicketService {
         return typeTicketRepository.findAll();
     }
 
+    @Override
+    public TypeTicket findById(Long id) {
+        return this.typeTicketRepository.findTypeTicketById(id).orElseThrow(
+                () -> new EntityNotFoundException("Type Ticket n'existe pas",ErrorCodes.TYPETICKET_NOT_FOUND)
+        );
+    }
+
     public TypeTicket save(TypeTicket typeTicket) {
-        List<String> errors = TypeTicketValidator.TypeTicketValidate(typeTicket);
+      /*  List<String> errors = TypeTicketValidator.TypeTicketValidate(typeTicket);
         if(!errors.isEmpty()){
             throw new InvalidEntityException("le type  est invalide ", ErrorCodes.TYPETICKET_NOT_VALID,errors);
 
-        }
+        }*/
         return typeTicketRepository.save(typeTicket);
     }
 

@@ -15,6 +15,8 @@ public interface EnfantService {
 
     List<Enfant> findAllByMatricule(String matricule);
 
+    public void deleteAll();
+
     public List<Enfant> findAll();
 
 

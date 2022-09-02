@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface ConjointRepository extends JpaRepository<Conjoint,Long> {
 
-    Optional<List<Conjoint>> findAllByMatricule(String matricule);
+
 }

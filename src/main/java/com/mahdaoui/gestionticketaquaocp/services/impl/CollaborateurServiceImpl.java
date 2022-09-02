@@ -19,21 +19,41 @@ public class CollaborateurServiceImpl  implements CollaborateurService {
     @Autowired
     CollaborateurRepository collaborateurRepository;
 
+
     @Override
-    public Collaborateur save(Collaborateur collaborateur) {
-        List<String> errors = CollaborateurValidator.CollaboratorValidate(collaborateur);
+    public Collaborateur update(Collaborateur collaborateur) {
+       /* List<String> errors = CollaborateurValidator.CollaboratorValidate(collaborateur);
         if(!errors.isEmpty()){
             throw new InvalidEntityException("collaborateur n'est pas valide" , ErrorCodes.COLLABORATEUR_NOT_VALID,errors);
+        }*/
+
+        if(collaborateurRepository.findCollaborateurByMatricule(collaborateur.getMatricule()).isEmpty()){
+            throw new InvalidEntityException("collaborateur n'existe pas" , ErrorCodes.COLLABORATEUR_NOT_FOUND);
         }
+
+
         return collaborateurRepository.save(collaborateur) ;
     }
 
     @Override
-    public void deleteById(Long id) {
-        if(id == null){
-            throw new EntityNotFoundException("cette collaborateur n'existe pas");
+    public Collaborateur save(Collaborateur collaborateur) {
+        List<String> errors = CollaborateurValidator.CollaboratorValidate(collaborateur);
+        var c = collaborateurRepository.findCollaborateurByMatricule(collaborateur.getMatricule());
+        if(c.isPresent()){
+            errors.add("cette matricule est dupliqué " + collaborateur.getMatricule());
         }
-        collaborateurRepository.deleteById(id);
+        if(!errors.isEmpty()){
+            throw new InvalidEntityException("collaborateur n'est pas valide" , ErrorCodes.COLLABORATEUR_NOT_VALID,errors);
+        }
+
+        return collaborateurRepository.save(collaborateur) ;
+    }
+
+    @Override
+    public void deleteAll() {
+
+        collaborateurRepository.deleteAll();
+
     }
 
     @Override
@@ -47,14 +67,10 @@ public class CollaborateurServiceImpl  implements CollaborateurService {
     }
 
     @Override
-    public Collaborateur findById(Long id) {
-        if(id == null){
-            throw new EntityNotFoundException("l'id est nulle");
-        }
-
-        return collaborateurRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("l'id n'existe pas ",ErrorCodes.COLLABORATEUR_NOT_FOUND  ) );
+    public Long countAllCollaborateurs() {
+        return collaborateurRepository.getNombreTotalCollaborateur();
     }
+
 
     @Override
     public List<Collaborateur> findAll() {

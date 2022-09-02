@@ -17,13 +17,14 @@ public class TicketController implements TicketApi {
     @Autowired
     TicketService ticketService;
 
-    @Override
+    /*@Override
     public ResponseEntity<List<Ticket>> findAllByMatricule(String matricule) {
         return new ResponseEntity<>(ticketService.findAllByMatricule(matricule) , HttpStatus.OK);
-    }
+    }*/
 
     @Override
     public ResponseEntity<Ticket> save(Ticket ticket) {
+
         return new ResponseEntity<>(ticketService.save(ticket),HttpStatus.CREATED);
 
     }
@@ -31,6 +32,11 @@ public class TicketController implements TicketApi {
     @Override
     public void deleteById(Long id) {
             ticketService.deleteById(id);
+    }
+
+    @Override
+    public void deleteAll() {
+        ticketService.deleteAll();
     }
 
     @Override

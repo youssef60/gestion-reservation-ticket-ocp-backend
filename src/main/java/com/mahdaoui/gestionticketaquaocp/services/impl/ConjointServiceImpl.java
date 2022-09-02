@@ -4,6 +4,7 @@ import com.mahdaoui.gestionticketaquaocp.exceptions.EntityNotFoundException;
 import com.mahdaoui.gestionticketaquaocp.exceptions.ErrorCodes;
 import com.mahdaoui.gestionticketaquaocp.exceptions.InvalidEntityException;
 import com.mahdaoui.gestionticketaquaocp.models.Conjoint;
+import com.mahdaoui.gestionticketaquaocp.repositories.CollaborateurRepository;
 import com.mahdaoui.gestionticketaquaocp.repositories.ConjointRepository;
 import com.mahdaoui.gestionticketaquaocp.services.ConjointService;
 import com.mahdaoui.gestionticketaquaocp.validators.ConjointValidator;
@@ -19,13 +20,20 @@ public class ConjointServiceImpl implements ConjointService {
     @Autowired
     ConjointRepository conjointRepository;
 
+    @Autowired
+    CollaborateurRepository collaborateurRepository;
+
     @Override
     public Conjoint save(Conjoint conjoint) {
         List<String> errors = ConjointValidator.conjointValidate(conjoint);
+
+        if(collaborateurRepository.findCollaborateurByMatricule(conjoint.getMatricule()).isEmpty()){
+            errors.add("matricule " + conjoint.getMatricule() + " du collaborateur n'exsiste pas");
+        }
         if(!errors.isEmpty()){
             throw new InvalidEntityException("la conjointe n'est pas valide", ErrorCodes.CONJOINT_NOT_VALID,errors);
         }
-        //TODO : CHECK FOR THE COLLABORATEUR
+
         return conjointRepository.save(conjoint);
     }
 
@@ -38,14 +46,10 @@ public class ConjointServiceImpl implements ConjointService {
     }
 
     @Override
-    public List<Conjoint> findAllByMatricule(String matricule) {
-        if(!StringUtils.hasLength(matricule)){
-            throw new EntityNotFoundException("le matricule n'est pas valide");
-        }
-        return conjointRepository.findAllByMatricule(matricule).
-                orElseThrow( () -> new EntityNotFoundException("conjoint avec le matricule " +matricule+ " n'existe pas"
-                , ErrorCodes.CONJOINT_NOT_FOUND) );
+    public void deleteAll() {
+        this.conjointRepository.deleteAll();
     }
+
 
     @Override
     public List<Conjoint> findAll() {

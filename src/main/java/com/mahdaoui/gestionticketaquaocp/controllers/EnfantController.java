@@ -28,6 +28,11 @@ public class EnfantController implements EnfantApi {
     }
 
     @Override
+    public void deleteAll() {
+         enfantService.deleteAll()  ;
+    }
+
+    @Override
     public ResponseEntity<List<Enfant>> findAllByMatricule(String matricule) {
         return new ResponseEntity<>(enfantService.findAllByMatricule(matricule),HttpStatus.OK);
     }

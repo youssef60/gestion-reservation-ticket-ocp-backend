@@ -27,9 +27,10 @@ public class ConjointController implements ConjointApi {
     }
 
     @Override
-    public ResponseEntity<List<Conjoint>> findAllByMatricule(String matricule) {
-        return new ResponseEntity<>(conjointService.findAllByMatricule(matricule),HttpStatus.OK);
+    public void deleteAll() {
+        this.conjointService.deleteAll();
     }
+
 
     @Override
     public ResponseEntity<List<Conjoint>> findAll() {

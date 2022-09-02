@@ -1,11 +1,13 @@
 package com.mahdaoui.gestionticketaquaocp.controllers;
 
 import com.mahdaoui.gestionticketaquaocp.controllers.Api.TypeTicketApi;
+import com.mahdaoui.gestionticketaquaocp.models.Ticket;
 import com.mahdaoui.gestionticketaquaocp.models.TypeTicket;
 import com.mahdaoui.gestionticketaquaocp.services.TypeTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -28,12 +30,16 @@ public class TypeTicketController implements TypeTicketApi {
     }
 
     @Override
-    public ResponseEntity<String> findTypeTicketByType(String type) {
+    public ResponseEntity<TypeTicket> findTypeTicketByType( String type) {
         return new ResponseEntity<>(typeTicketService.findTypeTicketByType(type),HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<List<TypeTicket>> findAll() {
         return new  ResponseEntity<>(typeTicketService.findAll(),HttpStatus.OK);
+    }
+
+    public ResponseEntity<TypeTicket> findById( Long id){
+        return  new ResponseEntity<>(typeTicketService.findById(id) , HttpStatus.OK);
     }
 }

@@ -9,5 +9,7 @@ import java.util.Optional;
 @Repository
 public interface TypeTicketRepository extends JpaRepository<TypeTicket, Long> {
 
-    Optional<String> findTypeTicketByType( String type );
+    Optional<TypeTicket> findTypeTicketByType( String type );
+
+    Optional<TypeTicket> findTypeTicketById(Long id);
 }

@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket,Long> {
 
-    Optional<List<Ticket>> findAllByMatricule(String matricule);
+   /* Optional<List<Ticket>> findAllByMatricule(String matricule);*/
 }

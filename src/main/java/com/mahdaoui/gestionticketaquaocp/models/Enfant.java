@@ -1,17 +1,18 @@
 package com.mahdaoui.gestionticketaquaocp.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Data
+@Setter
 @Entity
 public class Enfant implements Serializable {
 
@@ -19,14 +20,41 @@ public class Enfant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String matricule;
-
     String Nom;
 
     String prenom;
 
-    Date dateNaissance;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    Date  dateNaissance;
+
 
     @ManyToOne()
     Collaborateur collaborateur;
+
+    @JsonBackReference
+    public Collaborateur getCollaborateur() {
+        return collaborateur;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return Nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public Date getDateNaissance() {
+        return dateNaissance;
+    }
+
+
+
+    public String getMatricule(){
+        return this.collaborateur.matricule;
+    }
 }

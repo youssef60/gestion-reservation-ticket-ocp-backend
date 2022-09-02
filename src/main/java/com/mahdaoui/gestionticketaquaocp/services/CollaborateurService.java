@@ -7,14 +7,17 @@ import java.util.List;
 public interface CollaborateurService {
 
 
+    Collaborateur update(Collaborateur collaborateur);
 
     public Collaborateur save(Collaborateur collaborateur);
 
-    public void  deleteById(Long id);
+   public void deleteAll();
 
     public Collaborateur findCollaborateurByMatricule(String matricule);
 
-    public Collaborateur findById(Long id);
+    public Long countAllCollaborateurs();
+
+
 
     public List<Collaborateur> findAll();
 

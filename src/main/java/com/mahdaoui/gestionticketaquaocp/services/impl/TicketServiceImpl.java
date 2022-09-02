@@ -20,7 +20,7 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     TicketRepository ticketRepository;
 
-    @Override
+   /* @Override
     public List<Ticket> findAllByMatricule(String matricule) {
         if(!StringUtils.hasLength(matricule)){
             throw new EntityNotFoundException("le matricule n'est pas valide");
@@ -28,15 +28,15 @@ public class TicketServiceImpl implements TicketService {
         return ticketRepository.findAllByMatricule(matricule).orElseThrow(
                 () -> new EntityNotFoundException("cette matricule n'existe pas", ErrorCodes.TICKET_NOT_FOUND)
         );
-    }
+    }*/
 
     @Override
     public Ticket save(Ticket ticket) {
-        List<String> errors = TicketValidator.TicketValidate(ticket);
+       /* List<String> errors = TicketValidator.TicketValidate(ticket);
         if(!errors.isEmpty()){
             throw new InvalidEntityException("le ticket est invalide ", ErrorCodes.TICKET_NOT_VALID,errors);
 
-        }
+        }*/
         return ticketRepository.save(ticket);
     }
 
@@ -61,5 +61,10 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public List<Ticket> findAll() {
         return ticketRepository.findAll();
+    }
+
+    @Override
+    public void deleteAll() {
+        ticketRepository.deleteAll();
     }
 }

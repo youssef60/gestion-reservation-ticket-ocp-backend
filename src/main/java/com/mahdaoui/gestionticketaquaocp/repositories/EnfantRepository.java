@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface EnfantRepository extends JpaRepository<Enfant,Long> {
 
-    Optional<List<Enfant>> findAllByMatricule(String matricule);
+    Optional<List<Enfant>> findAllByCollaborateur_Matricule(String matricule);
 }

@@ -20,11 +20,6 @@ public class TicketValidator {
             errors.add("veuillez remplir le nombre de ticket enfant");
             return errors;
         }
-        if(StringUtils.hasLength(ticket.getMatricule())){
-
-            errors.add("veuillez remplir le matricule");
-
-        }
 
         return  errors;
 

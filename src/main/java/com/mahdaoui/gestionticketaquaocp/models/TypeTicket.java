@@ -1,9 +1,7 @@
 package com.mahdaoui.gestionticketaquaocp.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Data
+
+@Setter
 @Entity
 public class TypeTicket implements Serializable {
 
@@ -24,10 +23,37 @@ public class TypeTicket implements Serializable {
 
     int montantAdulte;
 
+    @Column(unique=true)
     String type;
 
     String ville;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "typeTicket")
     List<Ticket> tickets;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public int getMontantEnfant() {
+        return montantEnfant;
+    }
+
+    public int getMontantAdulte() {
+        return montantAdulte;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
 }
